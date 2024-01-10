@@ -26,6 +26,7 @@ pipeline {
 		stage('Gradle Build'){
             steps{
                 sh "mvn clean package -DskipTests"
+		sh "mv target/*.jar app_"${BUILD_NO}".jar
             }
         }
 
