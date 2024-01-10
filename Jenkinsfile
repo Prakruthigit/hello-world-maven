@@ -25,9 +25,7 @@ pipeline {
 		
 		stage('Gradle Build'){
             steps{
-                script{
-                    mvn clean
-                }
+                sh "mvn clean package"
             }
         }
 
