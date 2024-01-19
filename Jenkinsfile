@@ -30,19 +30,20 @@ pipeline {
             }
         }
 
-	stage('Deploy'){
-		when{
-			expression { BRANCH_NAME ==~ /(develop|qa)/ }
-		}
-		steps{
-			script{
-				if (BRANCH_NAME == 'develop'){
-					echo "dev success"
-				} else if (BRANCH_NAME == 'qa'){
-					echo "qa success"
-				}
-			}
-		}
+	stage('Deploy){
+	      when {
+		      expression {BRANCH_NAME ==~ /(develop|qa)/}
+	      }
+	      steps{
+		      script{
+			      if (BRANCH_NAME == 'develop'){
+				      echo "Loop success in dev"
+			      } else if (BRANCH_NAME == 'qa'){
+				      echo "Loop success in qa"
+			      }
+			      
+		      }
+	      }
 	}
 	
 
