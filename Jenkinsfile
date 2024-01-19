@@ -31,16 +31,13 @@ pipeline {
         }
 
 	stage('Deploy'){
-	      when {
-		      expression { BRANCH_NAME ==~ /(develop|qa|'new-*')/ }
-	      }
 	      steps{
 		      script{
 			      if (BRANCH_NAME == 'develop'){
 				      echo "Loop success in dev"
 			      } else if (BRANCH_NAME == 'qa'){
 				      echo "Loop success in qa"
-			      } else if (BRANCH_NAME == 'new-*') {
+			      } else if (BRANCH_NAME.startswith('new-')) {
 				      echo "Loop success in new-branch"
 			      }
 			      
