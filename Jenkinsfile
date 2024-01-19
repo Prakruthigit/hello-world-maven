@@ -32,7 +32,7 @@ pipeline {
 
 	stage('Deploy'){
 		when{
-			expression { BRANCH_NAME ==~ /(develop/qa)/ }
+			expression { BRANCH_NAME ==~ /(develop|qa)/ }
 		}
 		steps{
 			script{
