@@ -35,7 +35,8 @@ pipeline {
 		      script{
 			      if (BRANCH_NAME == 'develop' | BRANCH_NAME.startsWith('new-') ){
 				      echo "Loop success in dev"
-			      } else if (BRANCH_NAME == 'qa'){
+			      } 
+			      else if (BRANCH_NAME == 'qa'){
 				      echo "Loop success in qa"
 			      } 
 		      }
