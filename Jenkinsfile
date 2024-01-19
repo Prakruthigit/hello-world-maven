@@ -30,14 +30,21 @@ pipeline {
             }
         }
 
-	stage('ECR push') {
-	      steps{
-		      sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 499756076901.dkr.ecr.us-east-1.amazonaws.com"
-		      sh"docker build -t newapp ."
-		      sh "docker tag newapp:latest 499756076901.dkr.ecr.us-east-1.amazonaws.com/newapp:latest"
-		      sh "docker push 499756076901.dkr.ecr.us-east-1.amazonaws.com/newapp:latest"
-	      }
+	stage('Deploy'){
+		when{
+			expression {BRANCH_NAME ==~ /(develop/qa)/}
+		}
+		steps{
+			script{
+				if (BRANCH_NAME == 'develop'){
+					echo "dev success"
+				} else if (BRANCH_NAME == 'qa'){
+					echo "qa success"
+				}
+			}
+		}
 	}
+	
 
     }
 }
