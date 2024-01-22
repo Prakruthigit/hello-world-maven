@@ -36,13 +36,26 @@ pipeline {
 			      if (BRANCH_NAME == 'develop' | BRANCH_NAME.startsWith('new-') ){
 				      echo "Loop success in dev"
 			      } 
-			      else if (BRANCH_NAME == 'qa'){
-				      echo "Loop success in qa"
-			      } 
+
+			      else if ((BRANCH_NAME == 'qa' | BRANCH_NAME.startsWith('new-') ){
+				      parallel{
+					      stage('Deploy to US'){
+						      steps{
+							      echo "verified in US"
+						      }
+					      }
+					      stage('Deploy to EU'){
+						      steps{
+							      echo "verified in EU"
+						      }
+					      }
+				      }
+			      }
+
 		      }
 	      }
-	}
+     }
 	
 
-    }
+  }
 }
