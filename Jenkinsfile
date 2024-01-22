@@ -8,20 +8,6 @@ pipeline {
                 checkout scm
             }
         }
-
-        stage('DEV Pipeline') 
-        {
-            steps{
-                script{
-                    if("$GIT_BRANCH" == 'develop') {
-                        echo "Loop success"
-                    }
-                    else {
-                        echo "Other branch"
-                    }
-                }
-            }
-        } 
 		
 	stage('Gradle Build'){
             steps{
@@ -38,29 +24,22 @@ pipeline {
 			      } 
 
 			      else if (BRANCH_NAME == 'qa' | BRANCH_NAME.startsWith('new-')) {
-				      echo "Loop success in ${BRANCH_NAME}"
+				    parallel {
+					    stage('US'){
+						    steps{
+							    echo "US"
+						    }
+					    }
+					    satge('EU'){
+						    steps{
+							    echo "EU"
+						    }
+					    }
+				    }  
 			      }
 		      }
 	      }
 	}
 
-	stage('Parallel'){
-		parallel {
-			stage('Deploy to us'){
-				steps{
-					echo "Hello US"
-					one = "twenty"
-					two = "twenty"
-					echo "$one, $two"
-				}
-			}
-
-			stage('Deploy to EU'){
-				steps{
-					echo "Hello EU"
-				}
-			}
-		}
-	}
     }    
 }
