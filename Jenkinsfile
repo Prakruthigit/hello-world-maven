@@ -21,24 +21,26 @@ pipeline {
 		      script{
 			      if (BRANCH_NAME == 'develop'){
 				      echo "Loop success in dev"
-			      } 
-
-			      else if (BRANCH_NAME == 'qa' | BRANCH_NAME.startsWith('new-')) {
-				    parallel {
-					    stage('US'){
-						    steps{
-							    echo "US"
-						    }
-					    }
-					    satge('EU'){
-						    steps{
-							    echo "EU"
-						    }
-					    }
-				    }  
 			      }
-		      }
 	      }
+	}
+
+	stage('Prod or Pre-Prod'){
+		if (BRANCH_NAME == 'new-branch') {
+			parallel{
+				stage('US') {
+				      steps{
+					      echo "US"
+				      }
+				}
+
+				stage('EU'){
+					steps{
+						echo "EU"
+					}
+				}
+			}
+		}
 	}
 
     }    
