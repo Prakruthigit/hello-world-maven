@@ -16,11 +16,22 @@ pipeline {
             }
         }
 
-	stage('Deploy'){
-	      steps{
-		      script{
-			      if (BRANCH_NAME == 'new-branch'){
-				      echo "Loop in new-branch"
+	stage('Parallel Deploy'){
+	      parallel {
+		      stage('US'){
+			    when {
+				    expression {$BRANCH_NAME == 'new-branch'}
+			    }
+			    steps{
+				    echo "US"
+			    }
+		      }
+		      stage('EU'){
+			      when{
+				   expression {$BRANCH_NAME == 'new-branch'}   
+			      }
+			      steps{
+				      echo "EU"
 			      }
 		      }
 	      }
