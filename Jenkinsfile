@@ -22,6 +22,7 @@ pipeline {
 			      if (BRANCH_NAME == 'develop'){
 				      echo "Loop success in dev"
 			      }
+		      }
 	      }
 	}
 
