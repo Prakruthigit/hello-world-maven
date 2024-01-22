@@ -17,7 +17,7 @@ pipeline {
         }
 
 	stage('Deploy'){
-	      if (BRANCH_NAME == new-branch){
+	      if (BRANCH_NAME == 'new-branch'){
 		      steps{
 			      script{
 				      echo "Success in new"
