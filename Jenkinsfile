@@ -16,34 +16,24 @@ pipeline {
             }
         }
 
-	stage('Parallel Deploy'){
-	  steps{
-		  script{
-			  if (env.BRANCH_NAME == 'dev') {
-				  echo "Loop in if success"
-			  }
-			  else{
-				     parallel {
-		      stage('US'){
-			    when {
-				    expression {env.BRANCH_NAME == 'new-branch'}
-			    }
-			    steps{
-				    echo "US"
-			    }
-		      }
-		      stage('EU'){
-			      when{
-				   expression {env.BRANCH_NAME == 'new-branch'}   
-			      }
-			      steps{
-				      echo "EU"
-			      }
-		      }
-	      }
-			  }
-		  }
-	  }
+	stage('Deploy in dev'){
+		steps{
+			script{
+				if (BRANCH_NAME == 'dev'){
+					echo "dev"
+				}
+			}
+		}
+	}
+
+	stage('Deploy in new-branch'){
+		steps{
+			script{
+				if (BRANCH_NAME == 'new-branch'){
+					echo "new-branch"
+				}
+			}
+		}
 	}
 
     }    
