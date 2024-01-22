@@ -26,8 +26,8 @@ pipeline {
 	      }
 	}
 
-	stage('Prod or Pre-Prod'){
-		if (BRANCH_NAME == 'new-branch') {
+	if (BRANCH_NAME == 'new-branch') {
+		 stage('Prod or Pre-Prod'){
 			parallel{
 				stage('US') {
 				      steps{
