@@ -19,7 +19,7 @@ pipeline {
 	stage('Parallel Deploy'){
 	  steps{
 		  script{
-			  if ($BRANCH_NAME == 'dev') {
+			  if (env.BRANCH_NAME == 'dev') {
 				  echo "Loop in if success"
 			  }
 			  else{
