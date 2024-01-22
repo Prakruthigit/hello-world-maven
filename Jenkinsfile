@@ -48,7 +48,7 @@ pipeline {
 		parallel {
 			stage('Deploy to us'){
 				steps{
-					"Hello US"
+					echo "Hello US"
 				}
 			}
 
