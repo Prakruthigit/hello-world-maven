@@ -18,30 +18,11 @@ pipeline {
 
 	stage('Deploy'){
 	      steps{
-		      script{
-			      if (BRANCH_NAME == 'develop'){
+	     		 if (BRANCH_NAME == 'develop'){
 				      echo "Loop success in dev"
 			      }
-		      }
+		      
 	      }
-	}
-
-	if (BRANCH_NAME == 'new-branch') {
-		 stage('Prod or Pre-Prod'){
-			parallel{
-				stage('US') {
-				      steps{
-					      echo "US"
-				      }
-				}
-
-				stage('EU'){
-					steps{
-						echo "EU"
-					}
-				}
-			}
-		}
 	}
 
     }    
