@@ -27,14 +27,24 @@ pipeline {
 	}
 
 	stage('Deploy in new-branch'){
-		steps{
-			script{
-				if (BRANCH_NAME == 'new-branch'){
-					echo "new-branch"
+		parallel{
+			stage('US'){
+				when {
+					expression{ anyOf { branch 'new-branch-*'; branch 'develop' }  }
+				}
+				steps{
+					echo "US"
+				}
+			}
+			stage('EU'){
+				when {
+					expression{ anyOf { branch 'new-*'; branch 'develop' }  }
+				}
+				steps{
+					echo "EU"
 				}
 			}
 		}
-	}
 
     }    
 }
