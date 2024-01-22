@@ -49,6 +49,9 @@ pipeline {
 			stage('Deploy to us'){
 				steps{
 					echo "Hello US"
+					one = "twenty"
+					two = "twenty"
+					echo "$one, $two"
 				}
 			}
 
