@@ -17,7 +17,13 @@ pipeline {
         }
 
 	stage('Parallel Deploy'){
-	      parallel {
+	  steps{
+		  script{
+			  if ($BRANCH_NAME == 'dev') {
+				  echo "Loop in if success"
+			  }
+			  else{
+				     parallel {
 		      stage('US'){
 			    when {
 				    expression {env.BRANCH_NAME == 'new-branch'}
@@ -35,6 +41,9 @@ pipeline {
 			      }
 		      }
 	      }
+			  }
+		  }
+	  }
 	}
 
     }    
