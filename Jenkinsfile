@@ -38,18 +38,7 @@ pipeline {
 			      } 
 
 			      else if (BRANCH_NAME == 'qa' | BRANCH_NAME.startsWith('new-')) {
-				      parallel{
-					      stage('Deploy to US'){
-						      steps{
-							      echo "verified in US"
-						      }
-					      }
-					      stage('Deploy to EU'){
-						      steps{
-							      echo "verified in EU"
-						      }
-					      }
-				      }
+				      echo "Loop success in ${BRANCH_NAME}"
 			      }
 		      }
 	      }
