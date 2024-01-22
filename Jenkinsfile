@@ -33,9 +33,10 @@ pipeline {
 	stage('Deploy'){
 	      steps{
 		      script{
-			      if (BRANCH_NAME == 'develop'){
+			      if (BRANCH_NAME == 'develop' | BRANCH_NAME.startsWith('new-') ){
 				      echo "Loop success in dev"
 			      } 
+
 			      else if ((BRANCH_NAME == 'qa' | BRANCH_NAME.startsWith('new-') ){
 				      parallel{
 					      stage('Deploy to US'){
@@ -50,10 +51,11 @@ pipeline {
 					      }
 				      }
 			      }
+
 		      }
 	      }
-	}
+     }
 	
 
-    }
+  }
 }
