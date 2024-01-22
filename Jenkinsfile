@@ -20,7 +20,7 @@ pipeline {
 	      parallel {
 		      stage('US'){
 			    when {
-				    expression {$BRANCH_NAME == 'new-branch'}
+				    expression {env.BRANCH_NAME == 'new-branch'}
 			    }
 			    steps{
 				    echo "US"
@@ -28,7 +28,7 @@ pipeline {
 		      }
 		      stage('EU'){
 			      when{
-				   expression {$BRANCH_NAME == 'new-branch'}   
+				   expression {env.BRANCH_NAME == 'new-branch'}   
 			      }
 			      steps{
 				      echo "EU"
