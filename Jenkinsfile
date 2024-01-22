@@ -17,10 +17,10 @@ pipeline {
         }
 
 	stage('Deploy'){
-	      if (BRANCH_NAME == 'new-branch'){
-		      steps{
-			      script{
-				      echo "Success in new"
+	      steps{
+		      script{
+			      if (BRANCH_NAME == 'new-branch'){
+				      echo "Loop in new-branch"
 			      }
 		      }
 	      }
