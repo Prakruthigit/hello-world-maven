@@ -43,5 +43,21 @@ pipeline {
 		      }
 	      }
 	}
+
+	stage('Parallel'){
+		parallel {
+			stage('Deploy to us'){
+				steps{
+					"Hello US"
+				}
+			}
+
+			stage('Deploy to EU'){
+				steps{
+					echo "Hello EU"
+				}
+			}
+		}
+	}
     }    
 }
