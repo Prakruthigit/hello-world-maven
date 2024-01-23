@@ -1,9 +1,11 @@
+def readProp;
+
 pipeline {
     agent any
 
     stages {
 
-         stage('Checkout') {
+         stage('Checkout git') {
             steps {
                 checkout scm
             }
@@ -23,13 +25,24 @@ pipeline {
             }
         } 
 		
-		stage('Gradle Build'){
+	stage('Gradle Build'){
             steps{
-                script{
-                    "sh mvn clean package"
-                }
+                sh "mvn clean package -DskipTests"
+		sh "mv target/*.jar target/app_${BUILD_NUMBER}.jar"
             }
         }
 
-    }
+	stage('Check prperty file'){
+		steps{
+			script{
+				readProp = readProperties file: "test.properties"
+				echo "The day is ${readProp['Monday']}"
+			}
+		}
+	}
+	    
+
+	
+
+  }
 }
