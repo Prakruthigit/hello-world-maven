@@ -1,7 +1,4 @@
-environment{
-	def props = readProperties(file:'pipeline-properties/test.properties')
-	def Var1 = props['Monday']
-}
+def readProp;
 
 pipeline {
     agent any
@@ -37,7 +34,8 @@ pipeline {
 
 	stage('Check prperty file'){
 		steps{
-			echo "${Var1}"
+			readProp = readProperties file: 'pipeline-properties/test.properties'
+			echo "The day is ${readProp['Monday']}"
 		}
 	}
 
