@@ -10,20 +10,6 @@ pipeline {
                 checkout scm
             }
         }
-
-        stage('DEV Pipeline') 
-        {
-            steps{
-                script{
-                    if("$GIT_BRANCH" == 'develop') {
-                        echo "Loop success"
-                    }
-                    else {
-                        echo "Other branch"
-                    }
-                }
-            }
-        } 
 		
 	stage('Gradle Build'){
             steps{
@@ -31,6 +17,7 @@ pipeline {
 		sh "mv target/*.jar target/app_${BUILD_NUMBER}.jar"
             }
         }
+
 
 	stage('Check prperty file'){
 		steps{
@@ -40,9 +27,26 @@ pipeline {
 			}
 		}
 	}
-	    
 
-	
-
-  }
+	stage('Deploy in new-branch'){
+		parallel{
+			stage('US'){
+				when {
+					expression{ anyOf { branch 'new-branch-*'; branch 'develop' }  }
+				}
+				steps{
+					echo "US"
+				}
+			}
+			stage('EU'){
+				when {
+					expression{ anyOf { branch 'new-*'; branch 'develop' }  }
+				}
+				steps{
+					echo "EU"
+				}
+			}
+		}
+	}
+    }    
 }
