@@ -37,7 +37,7 @@ pipeline {
 
 	stage('Check prperty file'){
 		steps{
-			echo "loop"
+			echo "${Var1}"
 		}
 	}
 
