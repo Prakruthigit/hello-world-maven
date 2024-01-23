@@ -1,4 +1,6 @@
-def props = readProperties(file:'pipeline-properties/test.properties')
+environment{
+	def props = readProperties(file:'pipeline-properties/test.properties')
+}
 
 pipeline {
     agent any
