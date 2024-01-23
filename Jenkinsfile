@@ -34,7 +34,7 @@ pipeline {
 
 	stage('Check prperty file'){
 		steps{
-			readProp = readProperties file: 'test.properties'
+			readProp = readProperties file: "test.propertie"
 			echo "The day is ${readProp['Monday']}"
 		}
 	}
