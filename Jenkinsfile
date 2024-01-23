@@ -1,3 +1,7 @@
+def props = readProperties  file:'pipeline-properties/test.properties'
+def Var1= props['Monday']
+def Var2= props['Tuesday']
+
 pipeline {
     agent any
 
@@ -30,31 +34,13 @@ pipeline {
             }
         }
 
-	stage('Deploy'){
-	      steps{
-		      script{
-			      if (BRANCH_NAME == 'develop' | BRANCH_NAME.startsWith('new-') ){
-				      echo "Loop success in dev"
-			      } 
+	stage('Check prperty file'){
+		steps{
+			echo "Var1=${Var1}"
+			echo "Var2=${Var2}"
+		}
+	}
 
-			      else if ((BRANCH_NAME == 'qa' | BRANCH_NAME.startsWith('new-') ){
-				      parallel{
-					      stage('Deploy to US'){
-						      steps{
-							      echo "verified in US"
-						      }
-					      }
-					      stage('Deploy to EU'){
-						      steps{
-							      echo "verified in EU"
-						      }
-					      }
-				      }
-			      }
-
-		      }
-	      }
-     }
 	
 
   }
