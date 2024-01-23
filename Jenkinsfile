@@ -1,9 +1,5 @@
-podTemplate{
-	node(POD_LABEL){
-		checkout scm
-		props readProperties(file:'pipeline-properties/test.properties')
-	}
-}
+def props = readProperties(file:'pipeline-properties/test.properties')
+
 pipeline {
     agent any
 
