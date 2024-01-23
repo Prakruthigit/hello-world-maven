@@ -1,3 +1,5 @@
+def readProp;
+
 pipeline {
     agent any
 
@@ -16,12 +18,12 @@ pipeline {
             }
         }
 
-	stage('Deploy in dev'){
+
+	stage('Check prperty file'){
 		steps{
 			script{
-				if (BRANCH_NAME == 'dev'){
-					echo "dev"
-				}
+				readProp = readProperties file: "test.properties"
+				echo "The day is ${readProp['Monday']}"
 			}
 		}
 	}
