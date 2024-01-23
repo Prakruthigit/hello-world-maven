@@ -34,10 +34,13 @@ pipeline {
 
 	stage('Check prperty file'){
 		steps{
-			readProp = readProperties file: "test.propertie"
-			echo "The day is ${readProp['Monday']}"
+			script{
+				readProp = readProperties file: "test.properties"
+				echo "The day is ${readProp['Monday']}"
+			}
 		}
 	}
+	    
 
 	
 
