@@ -1,7 +1,9 @@
-def props = readProperties  file:'pipeline-properties/test.properties'
-def Var1= props['Monday']
-def Var2= props['Tuesday']
-
+podTemplate{
+	node(POD_LABEL){
+		checkout scm
+		props readProperties(file:'pipeline-properties/test.properties')
+	}
+}
 pipeline {
     agent any
 
@@ -36,8 +38,7 @@ pipeline {
 
 	stage('Check prperty file'){
 		steps{
-			echo "Var1=${Var1}"
-			echo "Var2=${Var2}"
+			echo "${props["Monday"]}"
 		}
 	}
 
