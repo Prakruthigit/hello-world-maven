@@ -1,6 +1,6 @@
 environment{
-	def props = readProperties(file:'pipeline-properties/test.properties')
-	def Var1= props['Monday']
+	props = readProperties(file:'pipeline-properties/test.properties')
+	Var1= props['Monday']
 }
 
 pipeline {
