@@ -1,5 +1,6 @@
 environment{
 	def props = readProperties(file:'pipeline-properties/test.properties')
+	def Var1= props['Monday']
 }
 
 pipeline {
@@ -36,7 +37,7 @@ pipeline {
 
 	stage('Check prperty file'){
 		steps{
-			echo "${props["Monday"]}"
+			echo "Var1=${Var1}"
 		}
 	}
 
