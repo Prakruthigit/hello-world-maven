@@ -1,4 +1,7 @@
 def readProp;
+def runPipeline{
+	echo "The day is ${readProp['Branch_name']}"
+}
 
 pipeline {
     agent any
@@ -30,7 +33,7 @@ pipeline {
 					echo "The day is ${readProp['Branch_name']}"
 				} else if (BRANCH_NAME == 'new-branch'){
 					readProp = readProperties file: "pipeline-properties/qa.properties"
-					echo "The day is ${readProp['Branch_name']}"
+					runPipeline()
 				} 
 			}
 		}
