@@ -1,5 +1,5 @@
 def readProp;
-def runPipeline{
+def runPipeline() {
 	echo "The day is ${readProp['Branch_name']}"
 }
 
