@@ -22,8 +22,16 @@ pipeline {
 	stage('Check prperty file'){
 		steps{
 			script{
-				readProp = readProperties file: "test.properties"
-				echo "The day is ${readProp['Monday']}"
+				if (BRANCH_NAME == develop){
+					readProp = readProperties file: "pipeline-properties/develop.properties"
+					echo "The day is ${readProp['Branch_name']}"
+				} else if (BRANCH_NAME == qa) {
+					readProp = readProperties file: "pipeline-properties/qa.properties"
+					echo "The day is ${readProp['Branch_name']}"
+				} else if (BRANCH_NAME == new-branch){
+					readProp = readProperties file: "pipeline-properties/qa.properties"
+					echo "The day is ${readProp['Branch_name']}"
+				} 
 			}
 		}
 	}
