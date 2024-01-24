@@ -29,7 +29,7 @@ pipeline {
 					readProp = readProperties file: "pipeline-properties/develop.properties"
 					echo "The day is ${readProp['Branch_name']}"
 				} else if (BRANCH_NAME == 'qa') {
-					readProp = readProperties file: "pipeline-properties/qa.properties"
+					readProp = readProperties file: "pipeline-properties/$BRANCH_NAME.properties"
 					runPipeline( readProp );
 				} else if (BRANCH_NAME == 'new-branch'){
 					readProp = readProperties file: "pipeline-properties/new-branch.properties"
