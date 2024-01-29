@@ -1,7 +1,7 @@
 def readProp;
 def runPipeline( readProp ) {
 	echo "The day is ${readProp['branch.name']}"
-	echo "${COMMIT_MSG}"
+	echo "Commit Message: **${COMMIT_MSG}**"
 }
 
 pipeline {
@@ -44,25 +44,6 @@ pipeline {
 		}
 	}
 
-	stage('Deploy in new-branch'){
-		parallel{
-			stage('US'){
-				when {
-					expression{ anyOf { branch 'new-branch-*'; branch 'develop' }  }
-				}
-				steps{
-					echo "US"
-				}
-			}
-			stage('EU'){
-				when {
-					expression{ anyOf { branch 'new-*'; branch 'develop' }  }
-				}
-				steps{
-					echo "EU"
-				}
-			}
-		}
-	}
+	
     }    
 }
