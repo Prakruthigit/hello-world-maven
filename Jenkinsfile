@@ -2,14 +2,14 @@ def readProp;
 def runPipeline( readProp ) {
 	echo "The day is ${readProp['branch.name']}"
 	echo "Commit Message: **${COMMIT_MSG}**"
-	echo "Commit ID is: **${COMMIT_ID}**"
+	echo "Commit ID is: "${COMMIT_ID}"
 }
 
 pipeline {
     agent any
     environment{
     	def COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
-	def COMMIT_ID = sh (script: 'git log --pretty=format:%h -n 5 ${GIT_COMMIT}', returnStdout: true).trim()
+	def COMMIT_ID = sh (script: 'git log --pretty=format:%h ${GIT_COMMIT}', returnStdout: true).trim()
 
     }
 
