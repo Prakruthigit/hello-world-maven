@@ -1,7 +1,7 @@
 def readProp;
 def runPipeline( readProp ) {
 	echo "The day is ${readProp['branch.name']}"
-	echo ${COMMIT_MSG}
+	echo "${COMMIT_MSG}"
 }
 
 pipeline {
