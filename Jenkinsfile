@@ -1,10 +1,15 @@
 def readProp;
 def runPipeline( readProp ) {
 	echo "The day is ${readProp['branch.name']}"
+	echo ${COMMIT_MSG}
 }
 
 pipeline {
     agent any
+    environment{
+    	def COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+
+    }
 
     stages {
 
@@ -22,7 +27,7 @@ pipeline {
         }
 
 
-	stage('Check prperty file'){
+	stage('Check property file'){
 		steps{
 			script{
 				if (BRANCH_NAME == 'develop'){
