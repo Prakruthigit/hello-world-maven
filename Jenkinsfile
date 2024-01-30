@@ -9,7 +9,7 @@ pipeline {
     agent any
     environment{
     	def COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
-	def COMMIT_ID = sh (script: 'git log --pretty=format:%h -n 1 ${GIT_COMMIT}', returnStdout: true).trim()
+	def COMMIT_ID = sh (script: 'git log --pretty=format:%h -n 1', returnStdout: true).trim()
 
     }
 
