@@ -1,6 +1,6 @@
 def readProp;
 def runCommand(readProp){
-	echo "The day is ${readProp['Branch_name']}"
+	echo "The branch is ${readProp['Branch_name']}"
 }
 
 pipeline {
