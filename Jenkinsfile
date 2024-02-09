@@ -11,7 +11,7 @@ pipeline {
             }
         }
 		
-	stage('Gradle Build'){
+	stage('Maven Build'){
             steps{
                 sh "mvn clean package -DskipTests"
 		sh "mv target/*.jar target/app_${BUILD_NUMBER}.jar"
@@ -36,25 +36,6 @@ pipeline {
 		}
 	}
 
-	stage('Deploy in new-branch'){
-		parallel{
-			stage('US'){
-				when {
-					expression{ anyOf { branch 'new-branch-*'; branch 'develop' }  }
-				}
-				steps{
-					echo "US"
-				}
-			}
-			stage('EU'){
-				when {
-					expression{ anyOf { branch 'new-*'; branch 'develop' }  }
-				}
-				steps{
-					echo "EU"
-				}
-			}
-		}
-	}
+	
     }    
 }
