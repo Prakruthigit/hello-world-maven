@@ -1,4 +1,7 @@
 def readProp;
+def runCommand(readProp){
+	echo "The day is ${readProp['Branch_name']}"
+}
 
 pipeline {
     agent any
@@ -24,7 +27,6 @@ pipeline {
 			script{
 				if (BRANCH_NAME == 'develop'){
 					readProp = readProperties file: "pipeline-properties/develop.properties"
-					echo "The day is ${readProp['Branch_name']}"
 				} else if (BRANCH_NAME == 'qa') {
 					readProp = readProperties file: "pipeline-properties/qa.properties"
 					echo "The day is ${readProp['Branch_name']}"
@@ -32,6 +34,14 @@ pipeline {
 					readProp = readProperties file: "pipeline-properties/qa.properties"
 					echo "The day is ${readProp['Branch_name']}"
 				} 
+			}
+		}
+	}
+
+	stage('Pass Property'){
+		steps{
+			script{
+				runCommand(readProp)
 			}
 		}
 	}
