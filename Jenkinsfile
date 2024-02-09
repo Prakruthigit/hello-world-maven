@@ -1,4 +1,7 @@
 def readProp;
+def runCommand(readProp){
+	echo "The branch is ${readProp['Branch_name']}"
+}
 
 pipeline {
     agent any
@@ -11,7 +14,7 @@ pipeline {
             }
         }
 		
-	stage('Gradle Build'){
+	stage('Maven Build'){
             steps{
                 sh "mvn clean package -DskipTests"
 		sh "mv target/*.jar target/app_${BUILD_NUMBER}.jar"
@@ -24,7 +27,6 @@ pipeline {
 			script{
 				if (BRANCH_NAME == 'develop'){
 					readProp = readProperties file: "pipeline-properties/develop.properties"
-					echo "The day is ${readProp['Branch_name']}"
 				} else if (BRANCH_NAME == 'qa') {
 					readProp = readProperties file: "pipeline-properties/qa.properties"
 					echo "The day is ${readProp['Branch_name']}"
@@ -36,25 +38,14 @@ pipeline {
 		}
 	}
 
-	stage('Deploy in new-branch'){
-		parallel{
-			stage('US'){
-				when {
-					expression{ anyOf { branch 'new-branch-*'; branch 'develop' }  }
-				}
-				steps{
-					echo "US"
-				}
-			}
-			stage('EU'){
-				when {
-					expression{ anyOf { branch 'new-*'; branch 'develop' }  }
-				}
-				steps{
-					echo "EU"
-				}
+	stage('Pass Property'){
+		steps{
+			script{
+				runCommand(readProp)
 			}
 		}
 	}
+
+	
     }    
 }
